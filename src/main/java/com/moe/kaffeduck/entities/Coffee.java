@@ -7,10 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"resourceId"})
 @Entity
 public class Coffee extends AbstractEntity {
 	@Column(nullable=false)
 	private String name;
+	@JsonProperty("roast_type")
 	@Column(nullable=false)
 	private String type;
 	@Column(nullable=false)
@@ -57,5 +62,9 @@ public class Coffee extends AbstractEntity {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	
+	public Long getResourceId() {
+		return this.id;
 	}
 }

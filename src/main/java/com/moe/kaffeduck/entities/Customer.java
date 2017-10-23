@@ -7,10 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"resourceId"})
 @Entity
 public class Customer extends AbstractEntity {
 	@Column(nullable = false)
 	private String username;
+	@JsonIgnore
 	@Column(nullable = false)
 	private String password;
 	@Column(nullable = false)
@@ -24,9 +29,11 @@ public class Customer extends AbstractEntity {
 	@Column(nullable = false)
 	private String city;
 	@Column(nullable = false)
+	private String state;
+	@Column(nullable = false)
 	private String zipcode;
 	@Column(nullable = false)
-	private String phoneNumber;
+	private String phone_number;
 	@OneToMany(mappedBy = "customer")
 	private Set<Subscription> subscription;
 
@@ -86,6 +93,14 @@ public class Customer extends AbstractEntity {
 		this.city = city;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -94,12 +109,12 @@ public class Customer extends AbstractEntity {
 		this.zipcode = zipcode;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhone_number() {
+		return phone_number;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
 	}
 
 	public Set<Subscription> getSubscription() {
@@ -118,5 +133,9 @@ public class Customer extends AbstractEntity {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	
+	public Long getResourceId() {
+		return this.id;
 	}
 }
