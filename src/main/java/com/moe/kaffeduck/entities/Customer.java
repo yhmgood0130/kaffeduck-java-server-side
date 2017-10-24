@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"resourceId"})
@@ -15,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Customer extends AbstractEntity {
 	@Column(nullable = false)
 	private String username;
-	@JsonIgnore
 	@Column(nullable = false)
 	private String password;
 	@Column(nullable = false)
