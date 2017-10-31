@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.rest.core.annotation.RestResource;
+//import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -29,13 +29,13 @@ public class Subscription extends AbstractEntity {
 	private ZoneId zone_id;
 	private Boolean shipped;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@RestResource(exported = false)
-	private Coffee coffee;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
-	@RestResource(exported = false)
 	private Customer customer;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Coffee coffee;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Coffeemaker coffeemaker;
 
 	public Instant getAdded() {
 		return added;
@@ -69,6 +69,14 @@ public class Subscription extends AbstractEntity {
 		this.shipped = shipped;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
 	public Coffee getCoffee() {
 		return coffee;
 	}
@@ -77,12 +85,12 @@ public class Subscription extends AbstractEntity {
 		this.coffee = coffee;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Coffeemaker getCoffeemaker() {
+		return coffeemaker;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCoffeemaker(Coffeemaker coffeemaker) {
+		this.coffeemaker = coffeemaker;
 	}
 	
 	public Long getResourceId() {
